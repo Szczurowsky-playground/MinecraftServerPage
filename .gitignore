@@ -2,3 +2,5 @@
 !.gitignore
 !Main
 Main/migrations
+!LICENSE
+!README.md
