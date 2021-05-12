@@ -1,0 +1,60 @@
+{% extends 'Main/templates/root.html' %}
+{% block content %}
+
+    <!-- Full Page Intro -->
+  <div class="view full-page-intro" style="background-image: url('https://i.imgur.com/OUgq5HJ.png'); background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">Lorem ipsum</h1>
+
+            <hr class="hr-light">
+
+            <p>
+              <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+            </p>
+
+            <p class="mb-4 d-none d-md-block">
+              <strong>Duis ut nisi tempus velit sollicitudin fermentum sed id quam. Nam eu sem vitae leo pretium iaculis et eget tortor. Sed molestie lorem id dolor euismod porta.</strong>
+            </p>
+
+            <a target="_blank" href="" class="btn btn-indigo btn-lg">Check for more
+              <i class="fas fa-graduation-cap ml-2"></i>
+            </a>
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+    <!--Main layout-->
+    <main>
+      <div class="container">
+
+        {% include 'Main/post.html' %}
+
+      </div>
+    </main>
+    <!--Main layout-->
+
+  <!-- Full Page Intro -->
+
+{% endblock %}

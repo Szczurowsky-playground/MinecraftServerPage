@@ -1,0 +1,58 @@
+<!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="" target="_blank">
+        <strong>{{ SERVER_NAME }}</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a href="" class="nav-link border border-light rounded"
+              target="_blank">
+              <i class="fab fa-facebook mr-2"></i>Check on facebook
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+            {% if user.is_authenticated == False %}
+                <i class="fas fa-user"></i> User panel
+            {% else %}
+                <img src="https://www.mc-heads.net/head/{{ user.nickname }}" class="rounded-circle z-depth-0"
+            alt="avatar image" height="35" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"> Witaj {{ user.nickname }} </a>
+            {% endif %}
+      </a>
+        <div class="animate__animated animate__fadeIn dropdown-menu dropdown-menu-left dropdown-default"
+          aria-labelledby="navbarDropdownMenuLink-333 ">
+            {% if user.is_authenticated == True %}
+                <a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Panel</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-envelope"></i> Helpdesk</a>
+              <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+            {% else %}
+                <a class="dropdown-item" href="/login"><i class="fas fa-key"></i> Log In</a>
+                <a class="dropdown-item" href="/register"><i class="fas fa-clipboard"></i> Sign In</a>
+            {% endif %}
+          </div>
+      </li>
+    </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->

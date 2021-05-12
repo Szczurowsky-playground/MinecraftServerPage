@@ -1,0 +1,32 @@
+{% for post in post_list %}
+    <!--Section: Main info-->
+        <section class="mt-5 wow fadeIn">
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+              <img src="{{ post.image }}" class="img-fluid z-depth-1-half" alt="Image">
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+              <!-- Main heading -->
+              <h3 class="h3 mb-3">{{ post.title }}</h3>
+                {{ post.text|safe }}
+                <p class="blog-post-meta"><span class="badge badge-danger">{{ post.date }}</span> <span class="badge badge-info">{{ post.author }}</span></p>
+
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+        </section>
+        <!--Section: Main info-->
+{% endfor %}
