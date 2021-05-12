@@ -4,6 +4,9 @@
 ## About
 Site is suitable for probably most actual minecraft servers. Functionality like HelpDesk and News on home page etc. would help server owners in managing server & community 
 
+## Screenshots
+Soon
+
 ## Built with
 
 <p align="left">
