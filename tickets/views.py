@@ -40,7 +40,7 @@ def home(request):
 def ticket_close(request, ticket_id):
     if not request.user.is_authenticated:
         return redirect('/')
-    tickets = Ticket.objects.filter(id=int(ticket_id))
+    tickets = Ticket.objects.filter(id=ticket_id)
     if tickets.count() != 0:
         if tickets.first().user == request.user or request.user.is_staff:
             tickets = Ticket.objects.filter(id=ticket_id).first()
@@ -51,7 +51,7 @@ def ticket_close(request, ticket_id):
                                                                 ' question feel free to reply again</strong>',
                                         ticket=tickets)
             else:
-                Response.objects.create(user=request.user, text='<strong>Closed by user</strong>')
+                Response.objects.create(user=request.user, text='<strong>Closed by user</strong>', ticket=tickets)
             return redirect('/tickets/id/' + str(ticket_id))
         else:
             return redirect('/tickets')
