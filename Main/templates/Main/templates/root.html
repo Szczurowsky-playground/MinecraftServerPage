@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="{% static 'Main/css/mdb.min.css' %}">
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="{% static 'Main/css/style.css' %}">
+    {% if Title == 'Tickets' %}
+        <link rel="stylesheet" href="{% static 'tickets/css/tickets.css' %}">
+    {% elif Title == 'Ticket' %}
+        <link rel="stylesheet" href="{% static 'tickets/css/ticket.css' %}">
+    {% endif %}
 </head>
 <body>
 {% include 'Main/templates/navbar.html' %}
