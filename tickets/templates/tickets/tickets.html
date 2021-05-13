@@ -96,6 +96,40 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            {% if user.is_superuser == True %}
+            <br><br>
+                <h2>User tickets</h2>
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>User</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Handled by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in user_tickets %}
+                        <tr>
+                            <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.id }}</a></td>
+                        <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.user }}</a></td>
+                            <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.title }}</a></td>
+                            <td>{{ ticket.created }}</td>
+                            {% if ticket.blocked == True %}
+                                <td><span class="badge badge-danger m-0">Blocked</span></td>
+                            {% elif ticket.solved == True %}
+                                <td><span class="badge badge-warning m-0">Closed</span></td>
+                                {% else %}
+                                <td><span class="badge badge-primary m-0">Open</span></td>
+                            {% endif %}
+                            <td><span>{{ ticket.handled_by }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
             </div>
         </div>
     </div>
