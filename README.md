@@ -35,8 +35,8 @@ https://imgur.com/a/1JCdUw2
 - Itemshop
 
 ## Design
-MDB Boostrap template(Old one) on free license: https://mdbootstrap.com/general/license/
-
+MDB Boostrap template(Old one) on free license: https://mdbootstrap.com/general/license/ </br>
+This too: https://www.bootdey.com/snippets/tagged/ticket
 ## Contact
 Feel free to contact me via discord `Szczurowsky#2137`
 
