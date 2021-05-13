@@ -5,7 +5,7 @@
 Site is suitable for probably most actual minecraft servers. Functionality like HelpDesk and News on home page etc. would help server owners in managing server & community 
 
 ## Screenshots
-Soon
+https://imgur.com/a/1JCdUw2
 
 ## Built with
 
@@ -28,6 +28,7 @@ Soon
 - Place into Django directory
 - Migrate database  
 - Add url to app in main url file. `path('', include('Main.urls'))`
+- If you want to use tickets than import them to `path('tickets/', include('tickets.urls'))`  
 - Enjoy
 
 ## To Do
