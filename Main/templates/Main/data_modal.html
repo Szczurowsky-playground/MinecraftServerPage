@@ -12,7 +12,7 @@
         {% for u in user_sec  %}
             <h5><strong><i class="fas fa-user ml-2"></i> Username: {{ u.username }}</strong><br></h5>
             <h5><strong><i class="fas fa-user-ninja ml-2"></i> Nickname: {{ u.nickname }}</strong><br></h5>
-            <h5><strong><i class="fas fa-envelope-open ml-2"></i> Username: {{ u.email }}</strong><br></h5>
+            <h5><strong><i class="fas fa-envelope-open ml-2"></i> Email address: {{ u.email }}</strong><br></h5>
             <h5><strong><i class="fas fa-history ml-2"></i> Last login: {{ u.last_login }}</strong><br></h5>
             <h5><strong><i class="fas fa-handshake ml-2"></i> Join date: {{ u.date_joined }}</strong><br></h5>
         {% endfor %}
