@@ -42,7 +42,7 @@
                 <p class="badge badge-danger">{{ error|striptags }}</p>
             {% endfor %}
                 <!-- Form -->
-                <form class="form-signin " method="post"> {% csrf_token %}
+                <form method="post"> {% csrf_token %}
                   <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
                   <label for="username" class="sr-only">Username</label>
                   <input type="username" id="id_username" class="form-control" name="username" placeholder="Your username" required autofocus><br/>
