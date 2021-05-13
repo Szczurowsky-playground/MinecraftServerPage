@@ -1,0 +1,108 @@
+{% extends 'Main/templates/root.html' %}
+{% block content %}
+    {% include 'tickets/ticket_modal.html' %}
+    <!-- Full Page Intro -->
+  <div class="view full-page-intro" style="background-image: url('https://i.imgur.com/OUgq5HJ.png'); background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">Ticket</h1>
+
+            <hr class="hr-light">
+
+            <p>
+              <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+            </p>
+
+            <p class="mb-4 d-none d-md-block">
+              <strong>Duis ut nisi tempus velit sollicitudin fermentum sed id quam. Nam eu sem vitae leo pretium iaculis et eget tortor. Sed molestie lorem id dolor euismod porta.</strong>
+            </p>
+
+            <a target="_blank" data-toggle="modal" data-target="#new_ticket" class="btn btn-indigo btn-lg">Submit new ticket
+              <i class="fas fa-ticket-alt ml-2"></i>
+            </a>
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+    <!--Main layout-->
+    <main>
+<div class="container mb-4 main-container">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            {% include 'tickets/user_sidebar.html' %}
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <a class="list-group-item active">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fa fa-tag mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Ticket list</div>
+                            </div><span class="badge badge-secondary">{{ ticket_quantity }}</span>
+                        </div>
+                    </a>
+                    <a class="list-group-item" href="#"><i class="fa fa-user text-muted"></i>Profile</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Orders Table-->
+        <div class="col-lg-8 pb-5">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Handled by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in tickets %}
+                        <tr>
+                            <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.id }}</a></td>
+                            <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.title }}</a></td>
+                            <td>{{ ticket.created }}</td>
+                            {% if ticket.blocked == True %}
+                                <td><span class="badge badge-danger m-0">Blocked</span></td>
+                            {% elif ticket.solved == True %}
+                                <td><span class="badge badge-warning m-0">Closed</span></td>
+                                {% else %}
+                                <td><span class="badge badge-primary m-0">Open</span></td>
+                            {% endif %}
+                            <td><span>{{ ticket.handled_by }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    </main>
+    <!--Main layout-->
+
+  <!-- Full Page Intro -->
+
+{% endblock %}

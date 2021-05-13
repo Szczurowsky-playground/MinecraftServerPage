@@ -1,0 +1,10 @@
+                <div class="author-card pb-3">
+                    <div class="author-card-cover" style="background-image: url('https://i.imgur.com/OUgq5HJ.png');"></div>
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar"><img src="https://mc-heads.net/head/{{ user.nickname }}" alt="{{ user.username }}">
+                        </div>
+                        <div class="author-card-details">
+                            <h5 class="author-card-name text-lg">{% if user.is_superuser %}<p class="badge badge-danger">Admin</p> {% endif %} {{ user.nickname }}</h5><span class="author-card-position">Joined {{ user.date_joined|date:"d M Y" }}</span>
+                        </div>
+                    </div>
+                </div>

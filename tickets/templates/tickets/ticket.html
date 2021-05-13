@@ -1,0 +1,130 @@
+{% extends 'Main/templates/root.html' %}
+{% block content %}
+
+    <!-- Full Page Intro -->
+  <div class="view full-page-intro" style="background-image: url('https://i.imgur.com/OUgq5HJ.png'); background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">Ticket ID {{ ticket.id }}</h1>
+
+            <hr class="hr-light">
+
+            <p>
+              <strong>{{ ticket.title }}</strong>
+            </p>
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+    <!--Main layout-->
+    <main>
+        <div class="container padding-bottom-3x mb-2">
+            <div class="row">
+                <div class="col-lg-4">
+                <br>
+                {% include 'tickets/user_sidebar.html' %}
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item active" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-tag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Ticket list</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="#"><i class="fa fa-user text-muted"></i>Profile</a>
+                        <a class="list-group-item badge-danger" href="/tickets/id/{{ ticket.id }}/close"><i class="fa fa-window-close text-muted"></i>Close ticket</a>
+                        {% if user.is_superuser %}
+                            {% include 'tickets/admin_modal.html' %}
+                            <a class="list-group-item" data-toggle="modal" data-target="#admin_panel"><i class="fa fa-user-shield text-muted"></i>Admin panel</a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+                <div class="col-lg-8">
+                    <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                    <div class="table-responsive margin-bottom-2x">
+                        <table class="table margin-bottom-none">
+                            <thead>
+                                <tr>
+                                    <th>Ticket ID</th>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Handled by</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.id }}</a></td>
+                                    <td><a class="navi-link" href="/tickets/id/{{ ticket.id }}">{{ ticket.title }}</a></td>
+                                    <td>{{ ticket.created }}</td>
+                                    {% if ticket.blocked == True %}
+                                        <td><span class="badge badge-danger m-0">Blocked</span></td>
+                                    {% elif ticket.solved == True %}
+                                        <td><span class="badge badge-warning m-0">Closed</span></td>
+                                        {% else %}
+                                        <td><span class="badge badge-primary m-0">Open</span></td>
+                                    {% endif %}
+                                    <td><span>{{ ticket.handled_by.nickname }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="comment">
+                            <div class="comment-author-ava"><img src="https://mc-heads.net/head/{{ ticket.user.nickname }}" alt="Avatar"></div>
+                            <div class="comment-body">
+                                <p class="comment-text">{{ ticket.problem }}</p>
+                                <div class="comment-footer"><span class="comment-meta"> {{ ticket.user.nickname }}, {{ ticket.created|date:"d M Y" }} {{ ticket.created|time:"H:i" }}</span></div>
+                            </div>
+                    </div>
+                    {% for reply in replies %}
+                         <div class="comment">
+                            <div class="comment-author-ava"><img src="https://mc-heads.net/head/{{ reply.user.nickname }}" alt="Avatar"></div>
+                            <div class="comment-body">
+                                <p class="comment-text">{{ reply.text|safe }}</p>
+                                <div class="comment-footer"><span class="comment-meta">{% if reply.user.is_superuser %}<p class="badge badge-danger">Admin</p> {% endif %} {{ reply.user.nickname }}, {{ reply.time|date:"d M Y" }} {{ reply.time|time:"H:i" }}</span></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <form method="post"> {% csrf_token %}
+                        <div class="form-group">
+                            {% if Blocked is not True %}
+                                <h5 class="mb-30 padding-top-1x">Leave Message</h5>
+                                <div class="text-right">
+                                    <textarea class="form-control form-control-rounded" id="id_text" name="text" rows="8" placeholder="Write your text here..." required=""></textarea>
+                                    <button class="btn btn-outline-primary" type="submit">Submit Message</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--Main layout-->
+
+  <!-- Full Page Intro -->
+
+{% endblock %}
