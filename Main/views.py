@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, User
 from django.contrib import auth
-from .forms import LoginValidate
+from .forms import LoginValidate, RegisterValidate
 from django.contrib.auth import authenticate, login
 
 SERVER_NAME = 'Example server'
@@ -18,6 +18,31 @@ def home(request):
         'post_list': posts,
     }
     return render(request, 'Main/index.html', context)
+
+
+def register_view(request):
+    context = {
+        'SERVER_NAME': SERVER_NAME,
+        'Title': 'Home',
+    }
+    if request.method == 'POST':
+        form = RegisterValidate(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            email = request.POST['email']
+            nickname = request.POST['nickname']
+            password = request.POST['password']
+            user = User.objects.create_user(username=username, email=email, nickname=nickname, password=password)
+            user.save()
+            login(request, user)
+            return redirect('/')
+        else:
+            context = {
+                'SERVER_NAME': SERVER_NAME,
+                'Title': 'Home',
+                'errors': form.errors.values(),
+            }
+    return render(request, 'Main/register.html', context)
 
 
 def login_view(request):
