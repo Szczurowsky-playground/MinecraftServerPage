@@ -1,0 +1,79 @@
+{% extends 'Main/templates/root.html' %}
+{% block content %}
+    {% include 'Main/data_modal.html' %}
+<!-- Full Page Intro -->
+  <div class="view full-page-intro" style="background-image: url('https://i.imgur.com/OUgq5HJ.png'); background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">Security</h1>
+
+            <hr class="hr-light">
+
+            <p>
+              <strong>If you don't want to change something just leave this filed empty</strong>
+            </p>
+
+            <p class="mb-4 d-none d-md-block">
+              <strong>Duis ut nisi tempus velit sollicitudin fermentum sed id quam. Nam eu sem vitae leo pretium iaculis et eget tortor. Sed molestie lorem id dolor euismod porta.</strong>
+            </p>
+            <a target="_blank" data-toggle="modal" data-target="#show_data" class="btn btn-indigo btn-lg">Show your data
+              <i class="fas fa-key ml-2"></i>
+            </a>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-6 col-xl-5 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card content-->
+              <div class="card-body">
+            {% for error in errors %}
+                <p class="badge badge-danger">{{ error|striptags }}</p>
+            {% endfor %}
+                <!-- Form -->
+                <form method="post"> {% csrf_token %}
+                  <h1 class="h3 mb-3 font-weight-normal">Change your data</h1>
+                  <label for="email_new" class="sr-only">New E-mail address</label>
+                  <input type="email" id="id_email_new" class="form-control" name="email_new" placeholder="New email" autofocus><br/>
+                  <label for="password_new" class="sr-only">New password</label>
+                  <input type="password" id="id_password_new" class="form-control" name="password_new" placeholder="New password" autofocus><br/>
+                  <label for="password" class="sr-only">Password</label>
+                  <input type="password" id="id_password" class="form-control" name="password" placeholder="Your actual password" required><br/>
+                  <input class="btn btn-lg btn-primary btn-block" type="submit" value="Change" />
+                </form>
+                <!-- Form -->
+
+              </div>
+
+            </div>
+            <!--/.Card-->
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+{% endblock %}
