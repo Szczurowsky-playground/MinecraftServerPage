@@ -4,6 +4,32 @@ from django.core.validators import validate_email, validate_slug
 from django.contrib.auth.password_validation import validate_password
 
 
+class SecurityValidate(forms.Form):
+    email_new = forms.CharField(required=False)
+    password_new = forms.CharField(required=False)
+    password = forms.CharField(error_messages={'required': 'Password can not be empty'})
+
+    def clean(self):
+        email_new = str(self.cleaned_data.get('email_new'))
+        password_new = str(self.cleaned_data.get('password_new'))
+        password = str(self.cleaned_data.get('password'))
+        if password is None:
+            raise forms.ValidationError('Password can not be empty')
+        if password_new is None and email_new is None:
+            raise forms.ValidationError('You do not changing anything')
+        if email_new is not None and email_new is not '':
+            try:
+                validate_email(email_new)
+            except forms.ValidationError:
+                raise forms.ValidationError("Email is not correct")
+        if password_new is not None and password_new is not '':
+            try:
+                validate_password(password_new, self)
+            except forms.ValidationError as error:
+                raise forms.ValidationError(error)
+        return True
+
+
 class LoginValidate(forms.Form):
     username = forms.CharField(error_messages={'required': 'Username can not be empty'})
     password = forms.CharField(error_messages={'required': 'Password can not be empty'})
