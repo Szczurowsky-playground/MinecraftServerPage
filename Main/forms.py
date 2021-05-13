@@ -63,5 +63,5 @@ class RegisterValidate(forms.Form):
         if User.objects.filter(nickname=nickname).count() != 0:
             raise forms.ValidationError('Nickname already exists')
         if User.objects.filter(email=email).count() != 0:
-            raise forms.ValidationError('Email address already exists')
+            raise forms.ValidationError('Email is already claimed')
         return True
