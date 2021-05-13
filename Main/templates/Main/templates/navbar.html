@@ -40,6 +40,9 @@
         <div class="animate__animated animate__fadeIn dropdown-menu dropdown-menu-left dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333 ">
             {% if user.is_authenticated == True %}
+                {% if user.is_staff %}
+                    <a class="dropdown-item" href="/admin"><i class="fas fa-user-shield"></i> Admin Panel</a>
+                {% endif %}
                 <a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Panel</a>
               <a class="dropdown-item" href="#"><i class="fas fa-envelope"></i> Helpdesk</a>
               <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
