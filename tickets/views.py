@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Ticket, Response
-from django.http import HttpResponseNotFound
 from .forms import ValidateResponse, ValidateTicket
+from django.http import HttpResponseNotFound
 
 SERVER_NAME = 'Example server'
 
@@ -16,13 +16,24 @@ def home(request):
             ticket = Ticket.objects.create(user=request.user, title=request.POST['title'], problem=request.POST['text'])
             return redirect('/tickets/id/' + str(ticket.id))
     tickets = Ticket.objects.filter(user=request.user)
-    context = {
-        'ticket_quantity': tickets.count(),
-        'tickets': tickets,
-        'user': request.user,
-        'SERVER_NAME': SERVER_NAME,
-        'Title': 'Tickets',
-    }
+    if not request.user.is_staff:
+        context = {
+            'ticket_quantity': tickets.count(),
+            'tickets': tickets,
+            'user': request.user,
+            'SERVER_NAME': SERVER_NAME,
+            'Title': 'Tickets',
+        }
+    else:
+        user_tickets = Ticket.objects.all()
+        context = {
+            'ticket_quantity': tickets.count(),
+            'tickets': tickets,
+            'user_tickets': user_tickets,
+            'user': request.user,
+            'SERVER_NAME': SERVER_NAME,
+            'Title': 'Tickets',
+        }
     return render(request, 'Tickets/tickets.html', context)
 
 
@@ -45,7 +56,7 @@ def ticket_close(request, ticket_id):
         else:
             return redirect('/tickets')
     else:
-        return HttpResponseNotFound('404')
+        return
 
 
 def ticket_unblock(request, ticket_id):
@@ -61,7 +72,7 @@ def ticket_unblock(request, ticket_id):
         else:
             return redirect('/tickets')
     else:
-        return HttpResponseNotFound('404')
+        return render(request, 'Main/templates/404.html', status=404)
 
 
 def ticket_block(request, ticket_id):
@@ -82,7 +93,7 @@ def ticket_block(request, ticket_id):
         else:
             return redirect('/tickets')
     else:
-        return HttpResponseNotFound('404')
+        return render(request, 'Main/templates/404.html', status=404)
 
 
 def ticket_delete(request, ticket_id):
@@ -97,7 +108,7 @@ def ticket_delete(request, ticket_id):
         else:
             return redirect('/tickets')
     else:
-        return HttpResponseNotFound('404')
+        return render(request, 'Main/templates/404.html', status=404)
 
 
 def ticket_view(request, ticket_id):
@@ -140,4 +151,4 @@ def ticket_view(request, ticket_id):
         else:
             return redirect('/tickets')
     else:
-        return HttpResponseNotFound('404')
+        return render(request, 'Main/templates/404.html', status=404)
