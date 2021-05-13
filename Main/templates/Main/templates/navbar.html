@@ -3,7 +3,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="" target="_blank">
+      <a class="navbar-brand" href="/">
         <strong>{{ SERVER_NAME }}</strong>
       </a>
 
@@ -34,17 +34,17 @@
             {% else %}
                 <img src="https://www.mc-heads.net/head/{{ user.nickname }}" class="rounded-circle z-depth-0"
             alt="avatar image" height="35" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"> Witaj {{ user.nickname }} </a>
+          aria-haspopup="true" aria-expanded="false"> Hi {{ user.nickname }} </a>
             {% endif %}
       </a>
         <div class="animate__animated animate__fadeIn dropdown-menu dropdown-menu-left dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333 ">
             {% if user.is_authenticated == True %}
-                {% if user.is_staff %}
-                    <a class="dropdown-item" href="/admin"><i class="fas fa-user-shield"></i> Admin Panel</a>
+                {% if user.is_superuser %}
+                    <a class="dropdown-item" href="/admin"><i class="fas fa-user-shield"></i> Django admin panel</a>
                 {% endif %}
                 <a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Panel</a>
-              <a class="dropdown-item" href="#"><i class="fas fa-envelope"></i> Helpdesk</a>
+              <a class="dropdown-item" href="/tickets"><i class="fas fa-envelope"></i> Tickets</a>
               <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
             {% else %}
                 <a class="dropdown-item" href="/login"><i class="fas fa-key"></i> Log In</a>
