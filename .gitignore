@@ -1,6 +1,8 @@
 /*
 !.gitignore
 !Main
+!tickets
+tickets/migrations
 Main/migrations
 !LICENSE
 !README.md
